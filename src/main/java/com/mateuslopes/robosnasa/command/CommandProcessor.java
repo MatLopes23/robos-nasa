@@ -12,6 +12,7 @@ public class CommandProcessor {
 
     public CommandProcessor() {
         handlers = new ArrayList<>();
+        handlers.add(new ValidaCommandHandler());
         handlers.add(new GirarEsquerdaHandler());
         handlers.add(new GirarDireitaHandler());
         handlers.add(new MoverHandler());

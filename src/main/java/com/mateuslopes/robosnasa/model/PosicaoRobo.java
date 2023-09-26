@@ -5,15 +5,20 @@ import lombok.Data;
 
 @Data
 public class PosicaoRobo {
-    private int eixoX;
-    private int eixoY;
+
+    private static final Integer TAMANHO_EIXO_X = 5;
+    private static final Integer TAMANHO_EIXO_Y = 5;
+
+    private Integer eixoX;
+    private Integer eixoY;
     private OrientacaoEnum orientacao;
+    private Boolean realizouMovimentoIrregular;
 
-
-    public PosicaoRobo(int eixoX, int eixoY, OrientacaoEnum orientacao) {
+    public PosicaoRobo(Integer eixoX, Integer eixoY, OrientacaoEnum orientacao) {
         this.eixoX = eixoX;
         this.eixoY = eixoY;
         this.orientacao = orientacao;
+        this.realizouMovimentoIrregular = Boolean.FALSE;
     }
 
     public void move() {
@@ -31,6 +36,7 @@ public class PosicaoRobo {
                 eixoX--;
                 break;
         }
+        verificaMovimentoValido();
     }
 
     public void rotacaoEsquerda() {
@@ -46,6 +52,11 @@ public class PosicaoRobo {
         int quantidadeOrientacao = OrientacaoEnum.values().length;
         int valorProximo = (valor + 1) % quantidadeOrientacao;
         orientacao = OrientacaoEnum.getByOrdem(valorProximo);
+    }
+
+    private void verificaMovimentoValido() {
+        if( eixoX < 0 || eixoX >= TAMANHO_EIXO_X || eixoY < 0 || eixoY >= TAMANHO_EIXO_Y )
+            realizouMovimentoIrregular = true;
     }
 
     @Override

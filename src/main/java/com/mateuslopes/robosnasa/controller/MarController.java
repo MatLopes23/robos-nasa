@@ -21,6 +21,10 @@ public class MarController {
     public String moveRobot(@PathVariable String comandos) {
         PosicaoRobo position = new PosicaoRobo(0, 0, OrientacaoEnum.NORTH);
         commandProcessor.execute(position, comandos);
+
+        if(position.getRealizouMovimentoIrregular())
+            return "falhou";
+
         return position.toString();
 
     }

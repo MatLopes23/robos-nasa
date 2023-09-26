@@ -5,7 +5,7 @@ import com.mateuslopes.robosnasa.model.PosicaoRobo;
 
 public class MoverHandler implements CommandHandler {
     @Override
-    public void handleCommand(PosicaoRobo posicao, char comando) {
+    public void handleCommand(PosicaoRobo posicao, Character comando) {
         if (CommandEnum.MOVE.getValue().equals(comando)) {
             posicao.move();
         }
