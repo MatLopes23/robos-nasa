@@ -25,4 +25,8 @@ public class CommandProcessor {
             }
         }
     }
+
+    public void addCommandHandler(CommandHandler handler) {
+        handlers.add(handler);
+    }
 }
