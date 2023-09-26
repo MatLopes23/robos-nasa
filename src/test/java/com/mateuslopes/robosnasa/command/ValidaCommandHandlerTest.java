@@ -2,6 +2,7 @@ package com.mateuslopes.robosnasa.command;
 
 import com.mateuslopes.robosnasa.enums.CommandEnum;
 import com.mateuslopes.robosnasa.enums.OrientacaoEnum;
+import com.mateuslopes.robosnasa.exception.RoboBadRequestException;
 import com.mateuslopes.robosnasa.model.PosicaoRobo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,25 +25,20 @@ public class ValidaCommandHandlerTest {
     @Test
     public void testHandleComandoValido() {
         Character comando = CommandEnum.MOVE.getValue();
-        handler.handleCommand(posicao, comando);
-
-        assertFalse(posicao.getRealizouMovimentoIrregular());
+        assertDoesNotThrow(() -> handler.handleCommand(posicao, comando));
     }
 
     @Test
     public void testHandleComandoInvalido() {
         Character comando = 'X';
-        handler.handleCommand(posicao, comando);
-
-        assertTrue(posicao.getRealizouMovimentoIrregular());
+        assertThrows(RoboBadRequestException.class, () -> handler.handleCommand(posicao, comando));
     }
 
     @Test
     public void testHandleListComandosValidos() {
         List<Character> comandosValidos = CommandEnum.getAllCommand();
         for (Character comando : comandosValidos) {
-            handler.handleCommand(posicao, comando);
-            assertFalse(posicao.getRealizouMovimentoIrregular());
+            assertDoesNotThrow(() -> handler.handleCommand(posicao, comando));
         }
     }
 
@@ -50,8 +46,7 @@ public class ValidaCommandHandlerTest {
     public void testHandleListComandosInvalidos() {
         Character[] comandosInvalidos = {'X', 'Y', 'Z'};
         for (Character comando : comandosInvalidos) {
-            handler.handleCommand(posicao, comando);
-            assertTrue(posicao.getRealizouMovimentoIrregular());
+            assertThrows(RoboBadRequestException.class, () -> handler.handleCommand(posicao, comando));
         }
     }
 }

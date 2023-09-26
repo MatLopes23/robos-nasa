@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GirarDireitaHandlerTest {
 
-
     private GirarDireitaHandler handler;
     private PosicaoRobo posicao;
     @BeforeEach

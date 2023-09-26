@@ -1,6 +1,7 @@
 package com.mateuslopes.robosnasa.model;
 
 import com.mateuslopes.robosnasa.enums.OrientacaoEnum;
+import com.mateuslopes.robosnasa.exception.RoboBadRequestException;
 import lombok.Data;
 
 @Data
@@ -12,13 +13,11 @@ public class PosicaoRobo {
     private Integer eixoX;
     private Integer eixoY;
     private OrientacaoEnum orientacao;
-    private Boolean realizouMovimentoIrregular;
 
     public PosicaoRobo(Integer eixoX, Integer eixoY, OrientacaoEnum orientacao) {
         this.eixoX = eixoX;
         this.eixoY = eixoY;
         this.orientacao = orientacao;
-        this.realizouMovimentoIrregular = Boolean.FALSE;
     }
 
     public void move() {
@@ -56,7 +55,7 @@ public class PosicaoRobo {
 
     private void verificaMovimentoValido() {
         if( eixoX < 0 || eixoX >= TAMANHO_EIXO_X || eixoY < 0 || eixoY >= TAMANHO_EIXO_Y )
-            realizouMovimentoIrregular = true;
+            throw new RoboBadRequestException("Robô ultrapasou os limites do terreno.");
     }
 
     @Override

@@ -1,5 +1,5 @@
-import com.mateuslopes.robosnasa.command.*;
-import com.mateuslopes.robosnasa.enums.OrientacaoEnum;
+package com.mateuslopes.robosnasa.command;
+
 import com.mateuslopes.robosnasa.model.PosicaoRobo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,10 +14,8 @@ public class CommandProcessorTest {
 
     @BeforeEach
     public void setUp() {
-        // Crie um mock para a PosicaoRobo
         posicao = mock(PosicaoRobo.class);
 
-        // Crie o CommandProcessor
         processor = new CommandProcessor();
     }
 

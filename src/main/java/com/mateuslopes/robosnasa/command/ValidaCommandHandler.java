@@ -1,6 +1,7 @@
 package com.mateuslopes.robosnasa.command;
 
 import com.mateuslopes.robosnasa.enums.CommandEnum;
+import com.mateuslopes.robosnasa.exception.RoboBadRequestException;
 import com.mateuslopes.robosnasa.model.PosicaoRobo;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class ValidaCommandHandler implements CommandHandler {
         List<Character> comandosValidos = CommandEnum.getAllCommand();
 
         if (!comandosValidos.contains(comando)) {
-            posicao.setRealizouMovimentoIrregular(Boolean.TRUE);
+            throw new RoboBadRequestException("Comando inválido identificado.");
         }
     }
 }

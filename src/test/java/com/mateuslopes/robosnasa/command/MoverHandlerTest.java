@@ -28,11 +28,11 @@ public class MoverHandlerTest {
 
     @Test
     public void testHandleMoveComandoSouth() {
-        PosicaoRobo posicao = new PosicaoRobo(0, 0, OrientacaoEnum.SOUTH);
+        PosicaoRobo posicao = new PosicaoRobo(1, 1, OrientacaoEnum.SOUTH);
 
         handler.handleCommand(posicao, CommandEnum.MOVE.getValue());
 
-        assertEquals(-1, posicao.getEixoY());
+        assertEquals(0, posicao.getEixoY());
     }
 
     @Test
@@ -46,11 +46,11 @@ public class MoverHandlerTest {
 
     @Test
     public void testHandleMoveComandoWest() {
-        PosicaoRobo posicao = new PosicaoRobo(0, 0, OrientacaoEnum.WEST);
+        PosicaoRobo posicao = new PosicaoRobo(1, 1, OrientacaoEnum.WEST);
 
         handler.handleCommand(posicao, CommandEnum.MOVE.getValue());
 
-        assertEquals(-1, posicao.getEixoX());
+        assertEquals(0, posicao.getEixoX());
     }
 
     @Test

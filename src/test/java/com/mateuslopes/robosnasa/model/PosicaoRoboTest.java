@@ -1,6 +1,7 @@
 package com.mateuslopes.robosnasa.model;
 
 import com.mateuslopes.robosnasa.enums.OrientacaoEnum;
+import com.mateuslopes.robosnasa.exception.RoboBadRequestException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,9 +17,9 @@ public class PosicaoRoboTest {
 
     @Test
     public void testMoveSouth() {
-        PosicaoRobo robo = new PosicaoRobo(0, 0, OrientacaoEnum.SOUTH);
+        PosicaoRobo robo = new PosicaoRobo(1, 1, OrientacaoEnum.SOUTH);
         robo.move();
-        assertEquals(-1, robo.getEixoY());
+        assertEquals(0, robo.getEixoY());
     }
 
     @Test
@@ -30,9 +31,9 @@ public class PosicaoRoboTest {
 
     @Test
     public void testMoveWest() {
-        PosicaoRobo robo = new PosicaoRobo(0, 0, OrientacaoEnum.WEST);
+        PosicaoRobo robo = new PosicaoRobo(1, 1, OrientacaoEnum.WEST);
         robo.move();
-        assertEquals(-1, robo.getEixoX());
+        assertEquals(0, robo.getEixoX());
     }
 
     @Test
@@ -50,24 +51,18 @@ public class PosicaoRoboTest {
     }
 
     @Test
-    public void testMovimentoInvalido() {
-        PosicaoRobo robo = new PosicaoRobo(5, 0, OrientacaoEnum.EAST);
-        robo.move();
-        assertTrue(robo.getRealizouMovimentoIrregular());
-    }
-
-    @Test
     public void testMovimentoDentroDosLimites() {
         PosicaoRobo robo = new PosicaoRobo(2, 2, OrientacaoEnum.NORTH);
         robo.move();
-        assertFalse(robo.getRealizouMovimentoIrregular());
+        assertEquals(3, robo.getEixoY());
     }
 
     @Test
     public void testMovimentoForaDosLimites() {
         PosicaoRobo robo = new PosicaoRobo(0, 5, OrientacaoEnum.NORTH);
-        robo.move();
-        assertTrue(robo.getRealizouMovimentoIrregular());
-    }
 
+        assertThrows(RoboBadRequestException.class, () -> {
+            robo.move();
+        });
+    }
 }
